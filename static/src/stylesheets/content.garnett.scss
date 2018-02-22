@@ -35,8 +35,8 @@
 @import 'module/_dropdown';
 @import 'module/charts/_doughnuts';
 
-@import 'module/content-garnett/_content.global';
-@import 'module/content-garnett/_media.global';
+@import 'module/content/_content.global';
+@import 'module/content/_media.global';
 @import 'module/_loader';
 
 @import 'module/content-garnett/_live-blog';
@@ -46,9 +46,9 @@
 @import 'module/identity/_activity-stream';
 
 @import 'module/_overlay';
-@import 'module/content-garnett/_gallery';
-@import 'module/content-garnett/_gallery-lightbox';
-@import 'module/content-garnett/_block-level-sharing';
+@import 'module/content/_gallery';
+@import 'module/content/_gallery-lightbox';
+@import 'module/content/_block-level-sharing';
 
 @import 'module/preferences/_notifications';
 
@@ -58,7 +58,7 @@
 
 @import 'module/_save-for-later';
 
-@import 'module/content-garnett/_tweets';
+@import 'module/content/tweets';
 
 /* ==========================================================================
    External modules
