@@ -43,33 +43,52 @@ const showAccountDataUpdateWarningMessage = accountDataUpdateWarningLink => {
 };
 
 const initMembership = (): void => {
-    const updateLink = accountDataUpdateWarning();
-    if (updateLink) {
-        mediator.on('modules:onwards:breaking-news:ready', breakingShown => {
-            if (!breakingShown) {
-                showAccountDataUpdateWarningMessage(updateLink);
-            }
-        });
-    }
-    if (isPayingMember()) {
-        fastdom
-            .read(() => document.getElementsByClassName('js-become-member'))
-            .then(becomeMemberLinks => {
-                if (becomeMemberLinks.length) {
-                    becomeMemberLinks[0].setAttribute('hidden', 'hidden');
-                }
-            });
+    console.log('** initMembership **');
 
-        fastdom
-            .read(() => document.getElementsByClassName('js-subscribe'))
-            .then(subscriberLinks => {
-                if (subscriberLinks.length) {
-                    subscriberLinks[0].classList.remove(
-                        'brand-bar__item--split--last'
-                    );
-                }
-            });
-    }
+    const asyncThing = () => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(true);
+            }, 2000)
+        });
+    };
+
+    const updateLink = accountDataUpdateWarning();
+
+    asyncThing().then((showMessage) => {
+        console.log('*** initMembership async thing done ***', showMessage);
+
+        if (showMessage) {
+            showAccountDataUpdateWarningMessage(updateLink);
+        }
+    });
+
+    // if (updateLink) {
+    //     mediator.on('modules:onwards:breaking-news:ready', breakingShown => {
+    //         if (!breakingShown) {
+    //             showAccountDataUpdateWarningMessage(updateLink);
+    //         }
+    //     });
+    // }
+    // if (isPayingMember()) {
+    //     fastdom
+    //         .read(() => document.getElementsByClassName('js-become-member'))
+    //         .then(becomeMemberLinks => {
+    //             if (becomeMemberLinks.length) {
+    //                 becomeMemberLinks[0].setAttribute('hidden', 'hidden');
+    //             }
+    //         });
+
+    //     fastdom
+    //         .read(() => document.getElementsByClassName('js-subscribe'))
+    //         .then(subscriberLinks => {
+    //             if (subscriberLinks.length) {
+    //                 subscriberLinks[0].classList.remove(
+    //                     'brand-bar__item--split--last'
+    //                 );
+    //             }
+    //         });
+    // }
 };
 
 export { initMembership };

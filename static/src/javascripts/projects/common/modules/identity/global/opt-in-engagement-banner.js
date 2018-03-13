@@ -115,31 +115,54 @@ const hide = (msg: Message) => {
 };
 
 const optInEngagementBannerInit = (): void => {
-    shouldDisplayOptInBanner().then((shouldIt: boolean) => {
-        if (shouldIt) {
+    console.log('** optInEngagementBannerInit **');
+
+    const asyncThing = () => {
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve(true);
+            }, 3000)
+        });
+    };
+
+    asyncThing().then((showMessage) => {
+        console.log('*** optInEngagementBannerInit async thing done ***', showMessage);
+        
+        if (showMessage) {
             const msg = new Message(messageCode, {
                 cssModifierClass: 'gdpr-opt-in',
                 permanent: true,
                 siteMessageComponentName: messageCode,
             });
             const shown = msg.show(templateHtml);
-            if (shown) {
-                ophan.record({
-                    component: 'gdpr-oi-campaign-alert',
-                    action: 'gdpr-oi-campaign : alert : show',
-                });
-                const closeButtonEl: ?HTMLElement = document.querySelector(
-                    `.${messageCloseBtn}`
-                );
-                if (!closeButtonEl)
-                    throw new Error('gdpr-oi-campaign : Missing close button');
-                closeButtonEl.addEventListener('click', (ev: MouseEvent) => {
-                    ev.preventDefault();
-                    hide(msg);
-                });
-            }
         }
     });
+
+    // shouldDisplayOptInBanner().then((shouldIt: boolean) => {
+    //     if (shouldIt) {
+    //         const msg = new Message(messageCode, {
+    //             cssModifierClass: 'gdpr-opt-in',
+    //             permanent: true,
+    //             siteMessageComponentName: messageCode,
+    //         });
+    //         const shown = msg.show(templateHtml);
+    //         if (shown) {
+    //             ophan.record({
+    //                 component: 'gdpr-oi-campaign-alert',
+    //                 action: 'gdpr-oi-campaign : alert : show',
+    //             });
+    //             const closeButtonEl: ?HTMLElement = document.querySelector(
+    //                 `.${messageCloseBtn}`
+    //             );
+    //             if (!closeButtonEl)
+    //                 throw new Error('gdpr-oi-campaign : Missing close button');
+    //             closeButtonEl.addEventListener('click', (ev: MouseEvent) => {
+    //                 ev.preventDefault();
+    //                 hide(msg);
+    //             });
+    //         }
+    //     }
+    // });
 };
 
 export { optInEngagementBannerInit };

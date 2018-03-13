@@ -53,11 +53,16 @@ class Message {
     }
 
     show(message: string): boolean {
+        console.log('*** Message show --->', this.id);
+
         const siteMessage = $('.js-site-message');
 
         if (this.pinOnHide) {
             $('.js-footer-site-message-copy').html(message);
         }
+
+        // console.log('*** show hasSeen --->', this.id, this.hasSeen());
+        // console.log('*** show siteMessage is hidden --->', this.id, siteMessage.hasClass('is-hidden'));
 
         // don't let messages unknowingly overwrite each other
         if (
@@ -68,8 +73,12 @@ class Message {
             if (this.pinOnHide) {
                 this.$footerMessage.removeClass('is-hidden');
             }
+
             return false;
         }
+
+        // console.log('*** show message add message --->', this.id);
+
         $('.js-site-message-copy').html(message);
 
         // Add site modifier message
@@ -123,6 +132,8 @@ class Message {
         if (this.type === 'modal') {
             this.bindModalListeners();
         }
+
+        // console.log('*** show message all done!', this.id);
 
         // Tell the calling function that our message is shown
         return true;

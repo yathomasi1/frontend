@@ -11,6 +11,8 @@ import { Message } from 'common/modules/ui/message';
  * Persist close state
  */
 const init = (): boolean => {
+    console.log('** cookiesBanner **');
+
     const geoContinentCookie = getCookie('GU_geo_continent');
     if (!geoContinentCookie || geoContinentCookie.toUpperCase() !== 'EU') {
         return false;

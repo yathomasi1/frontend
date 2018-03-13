@@ -199,6 +199,8 @@ const showBanner = (params: EngagementBannerParams): void => {
 };
 
 const membershipEngagementBannerInit = (): Promise<void> => {
+    console.log('** membershipEngagementBannerInit **');
+
     const bannerParams = deriveBannerParams(getGeoLocation());
     if (bannerParams && getVisitCount() >= bannerParams.minArticles) {
         return canDisplayMembershipEngagementBanner().then(canShow => {

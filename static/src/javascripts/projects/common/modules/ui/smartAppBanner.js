@@ -74,6 +74,8 @@ const showMessage = (): void => {
 };
 
 const init = (): void => {
+    console.log('** smartAppBanner **');
+
     if (!canUseSmartBanner() && isDevice() && canShow()) {
         showMessage();
     }
