@@ -376,4 +376,14 @@ trait CommercialSwitches {
     sellByDate = never,
     exposeClientSide = true
   )
+
+  val ReplaceSkimLinks: Switch = Switch(
+    group = Commercial,
+    name = "replace-skimlinks",
+    description = "For content in certain sections, replace body links supported by skimlinks.com with a skimlink url",
+    owners = group(Commercial),
+    safeState = Off,
+    sellByDate = never,
+    exposeClientSide = false
+  )
 }
