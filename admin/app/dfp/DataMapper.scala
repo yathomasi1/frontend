@@ -107,6 +107,7 @@ class DataMapper(adUnitService: AdUnitService,
     id = dfpLineItem.getId,
     orderId = dfpLineItem.getOrderId,
     name = dfpLineItem.getName,
+    lineItemType = Some(common.dfp.LineItemType.fromDFPLineItemType(dfpLineItem.getLineItemType.getValue)),
     startTime = toJodaTime(dfpLineItem.getStartDateTime),
     endTime = {
       if (dfpLineItem.getUnlimitedEndDateTime) None
