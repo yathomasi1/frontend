@@ -33,11 +33,11 @@ object LineItemType {
   implicit val lineItemWrites = new Writes[LineItemType] {
     def writes(lineItemType: LineItemType): JsValue = {
       lineItemType match {
-        case Sponsorship => Json.obj("type" -> "sponsorship")
-        case Other(lineItemTypeAsString) => Json.obj("type" -> lineItemTypeAsString)}}}
+        case Sponsorship => JsString("sponsorship")
+        case Other(lineItemTypeAsString) => JsString(lineItemTypeAsString)}}}
 
   implicit val lineItemTypeReads: Reads[LineItemType] =
-    (JsPath \ "id").read[String].map {
+    JsPath.read[String].map {
       case "sponsorship" => Sponsorship
       case otherType => Other(otherType)}
 }
