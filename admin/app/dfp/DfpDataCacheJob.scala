@@ -12,7 +12,8 @@ class DfpDataCacheJob(adUnitAgent: AdUnitAgent,
                       customFieldAgent: CustomFieldAgent,
                       customTargetingAgent: CustomTargetingAgent,
                       placementAgent: PlacementAgent,
-                      dfpApi: DfpApi) extends Logging {
+                      dfpApi: DfpApi,
+                      sponsorshipLineItemAgent: SponsorshipLineItemAgent) extends Logging {
 
   case class LineItemLoadSummary(
     validLineItems: Seq[GuLineItem],
@@ -146,6 +147,9 @@ class DfpDataCacheJob(adUnitAgent: AdUnitAgent,
 
       Store.putTopAboveNavSlotTakeovers(stringify(toJson(LineItemReport(now,
         data.topAboveNavSlotTakeovers, Seq.empty))))
+
+      val sponsorshipLineItemNumbers: List[Long] = data.lineItems.filter(_.lineItemType == Some(Sponsorship)).map(_.id).toList
+      sponsorshipLineItemAgent.sponsorshipLineItems.send(sponsorshipLineItemNumbers)
     }
   }
 }

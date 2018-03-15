@@ -61,6 +61,7 @@ trait AdminServices extends I18nComponents  {
   lazy val customTargetingKeyValueJob: CustomTargetingKeyValueJob = wire[CustomTargetingKeyValueJob]
   lazy val dataMapper: DataMapper = wire[DataMapper]
   lazy val dataValidation: DataValidation = wire[DataValidation]
+  lazy val sponsorshipLineItemAgent: SponsorshipLineItemAgent = wire[SponsorshipLineItemAgent]
   lazy val dfpDataCacheJob: DfpDataCacheJob = wire[DfpDataCacheJob]
   lazy val orderAgent: OrderAgent = wire[OrderAgent]
   lazy val placementAgent: PlacementAgent = wire[PlacementAgent]
